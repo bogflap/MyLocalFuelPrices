@@ -113,11 +113,43 @@ int main(int argc, char *argv[])
                     setMaxSize(&(dvs.maxE10), dv.e10.length());
                     setMaxSize(&(dvs.maxB7p), dv.b7p.length());
                     setMaxSize(&(dvs.maxB7s), dv.b7s.length());
-                    keyV = dv.e5.toFloat();
+                    keyV = dv.e10.toFloat();
 
                     dvs.values.insert(keyV, dv);
                 }
             }
+
+            // Display the column headers
+            ts.setFieldAlignment(QTextStream::AlignCenter);
+            ts.setFieldWidth(dvs.maxCity);
+            ts << "City";
+            ts.setFieldWidth(0);
+            ts << " ";
+            ts.setFieldWidth(dvs.maxCounty);
+            ts << "County";
+            ts.setFieldWidth(0);
+            ts << " ";
+            ts.setFieldWidth(dvs.maxPostCode);
+            ts << "P. Code";
+            ts.setFieldWidth(0);
+            ts << " ";
+            ts.setFieldWidth(dvs.maxE5);
+            ts << "E5";
+            ts.setFieldWidth(0);
+            ts << " ";
+            ts.setFieldWidth(dvs.maxE10);
+            ts << "E10";
+            ts.setFieldWidth(0);
+            ts << " ";
+            ts.setFieldWidth(dvs.maxB7p);
+            ts << "B7P";
+            ts.setFieldWidth(0);
+            ts << " ";
+            ts.setFieldWidth(dvs.maxB7s);
+            ts << "B7S";
+            ts.setFieldWidth(0);
+            ts << Qt::endl;
+            ts.flush();
 
             // Now display the values
             QMultiMapIterator<float, struct displayValue>   iDp(dvs.values);
