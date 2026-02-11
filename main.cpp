@@ -3,18 +3,20 @@
 #include <QTextStream>
 #include <QMultiMap>
 
-const int   CITY_COLUMN     = 14;
-const int   COUNTY_COLUMN   = 15;
-const int   E5_COLUMN       = 19;
-const int   E10_COLUMN      = 20;
-const int   B7P_COLUMN      = 21;
-const int   B7S_COLUMN      = 22;
-const char  COUNTY_NAME[]   = "DORSET";
+const int   POST_CODE_COLUMN    = 11;
+const int   CITY_COLUMN         = 14;
+const int   COUNTY_COLUMN       = 15;
+const int   E5_COLUMN           = 19;
+const int   E10_COLUMN          = 20;
+const int   B7P_COLUMN          = 21;
+const int   B7S_COLUMN          = 22;
+const char  COUNTY_NAME[]       = "DORSET";
 
 struct displayValue
 {
     QString city;
     QString county;
+    QString postCode;
     QString e5;
     QString e10;
     QString b7p;
@@ -25,6 +27,7 @@ struct displayValues
 {
     qsizetype maxCity;
     qsizetype maxCounty;
+    qsizetype maxPostCode;
     qsizetype maxE5;
     qsizetype maxE10;
     qsizetype maxB7p;
@@ -48,6 +51,7 @@ int main(int argc, char *argv[])
 
     struct displayValues    dvs
         {
+            0,
             0,
             0,
             0,
@@ -96,6 +100,7 @@ int main(int argc, char *argv[])
 
                     dv.city = columns.at(CITY_COLUMN);
                     dv.county = columns.at(COUNTY_COLUMN);
+                    dv.postCode = columns.at(POST_CODE_COLUMN);
                     dv.e5 = columns.at(E5_COLUMN);
                     dv.e10 = columns.at(E10_COLUMN);
                     dv.b7p = columns.at(B7P_COLUMN);
@@ -103,6 +108,7 @@ int main(int argc, char *argv[])
 
                     setMaxSize(&(dvs.maxCity), dv.city.length());
                     setMaxSize(&(dvs.maxCounty), dv.county.length());
+                    setMaxSize(&(dvs.maxPostCode), dv.postCode.length());
                     setMaxSize(&(dvs.maxE5), dv.e5.length());
                     setMaxSize(&(dvs.maxE10), dv.e10.length());
                     setMaxSize(&(dvs.maxB7p), dv.b7p.length());
@@ -128,6 +134,10 @@ int main(int argc, char *argv[])
                 ts << " ";
                 ts.setFieldWidth(dvs.maxCounty);
                 ts << iDp.value().county;
+                ts.setFieldWidth(0);
+                ts << " ";
+                ts.setFieldWidth(dvs.maxPostCode);
+                ts << iDp.value().postCode;
                 ts.setFieldWidth(0);
                 ts << " ";
                 ts.setFieldWidth(dvs.maxE5);
