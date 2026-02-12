@@ -10,7 +10,8 @@ const int   E5_COLUMN           = 19;
 const int   E10_COLUMN          = 20;
 const int   B7P_COLUMN          = 21;
 const int   B7S_COLUMN          = 22;
-const char  COUNTY_NAME[]       = "DORSET";
+const char  DORSET_NAME[]       = "DORSET";
+const char  SOMERSET_NAME[]     = "SOMERSET";
 
 struct displayValue
 {
@@ -51,14 +52,7 @@ int main(int argc, char *argv[])
 
     struct displayValues    dvs
         {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            QMultiMap<float, struct displayValue>()
+            0,0,0,0,0,0,0,QMultiMap<float, struct displayValue>()
         };
 
     while (true)
@@ -86,14 +80,16 @@ int main(int argc, char *argv[])
             fuelFile.close();
 
             // Now search through the lines looking for ones of interest
-            // Note the first line is the contains the column headers
-            // Note we are omitting any line that does not have a valid E5 value
+            // Note the first line contains the column headers
+            // Note we are omitting any line that does not have a
+            // valid sort value
             for (int i = 1; i < fuelFileLines.size(); i++)
             {
                 QStringList columns;
                 columns = fuelFileLines.at(i).split(",", Qt::KeepEmptyParts);
-                if ((columns.at(COUNTY_COLUMN) == COUNTY_NAME)
-                    && (columns.at(E5_COLUMN).length() != 0))
+                if ((   (columns.at(COUNTY_COLUMN) == DORSET_NAME)
+                     || (columns.at(COUNTY_COLUMN) == SOMERSET_NAME))
+                    &&  (columns.at(E10_COLUMN).length() != 0))
                 {
                     displayValue    dv;
                     float           keyV;
