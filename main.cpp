@@ -7,9 +7,9 @@ const int   POST_CODE_COLUMN    = 11;
 const int   CITY_COLUMN         = 14;
 const int   COUNTY_COLUMN       = 15;
 const int   E5_COLUMN           = 19;
-const int   E10_COLUMN          = 20;
-const int   B7P_COLUMN          = 21;
-const int   B7S_COLUMN          = 22;
+const int   E10_COLUMN          = 22;
+const int   B7P_COLUMN          = 28;
+const int   B7S_COLUMN          = 25;
 const char  DORSET_NAME[]       = "DORSET";
 const char  SOMERSET_NAME[]     = "SOMERSET";
 
